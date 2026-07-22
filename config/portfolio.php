@@ -21,7 +21,7 @@ return [
         ],
         'email' => 'andreibesanez20@gmail.com',
         'phone' => '+63 915 533 9599',
-        'location' => 'Aplaya, Digos City, Philippines',
+        'location' => 'Purok 9-A, Aplaya, Digos City, Philippines',
         'availability' => 'Open for freelance & part-time work',
         'education' => [
             'degree' => 'Bachelor of Science in Information Technology',

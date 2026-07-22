@@ -203,8 +203,8 @@
                             const map = new maplibregl.Map({
                                 container: 'map',
                                 style: isDark ? darkStyle : lightStyle,
-                                center: [125.37791, 6.73682], // Aplaya, Digos City coordinates [lng, lat]
-                                zoom: 14, // Zoomed in a bit more for Aplaya
+                                center: [125.37791, 6.73682], // Purok 9-A, Aplaya coordinates [lng, lat]
+                                zoom: 16, // Zoomed in to exact location
                                 attributionControl: false
                             });
                             
