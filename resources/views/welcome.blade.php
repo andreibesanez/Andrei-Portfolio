@@ -2,7 +2,7 @@
     <!-- Hero Section -->
     <section class="min-h-screen flex items-center pt-12 pb-24 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto relative overflow-hidden">
         <!-- Decorative dots -->
-        <div class="absolute right-20 top-32 opacity-20 pointer-events-none" data-aos="fade-in" data-aos-duration="1500">
+        <div class="hidden md:block absolute right-20 top-32 opacity-20 pointer-events-none -z-10" data-aos="fade-in" data-aos-duration="1500">
             <div class="grid grid-cols-5 gap-3">
                 @for($i=0; $i<25; $i++)
                 <div class="w-1.5 h-1.5 rounded-full bg-blue-600"></div>
