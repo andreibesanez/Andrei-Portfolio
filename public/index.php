@@ -5,18 +5,6 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-// Override cache paths for Vercel's read-only filesystem
-if (!empty($_ENV['APP_ENV']) && $_ENV['APP_ENV'] === 'production') {
-    $_ENV['APP_CONFIG_CACHE']   = '/tmp/config.php';
-    $_ENV['APP_EVENTS_CACHE']   = '/tmp/events.php';
-    $_ENV['APP_PACKAGES_CACHE'] = '/tmp/packages.php';
-    $_ENV['APP_ROUTES_CACHE']   = '/tmp/routes.php';
-    $_ENV['APP_SERVICES_CACHE'] = '/tmp/services.php';
-    $_ENV['VIEW_COMPILED_PATH'] = '/tmp';
-}
-
-
-
 // Determine if the application is in maintenance mode...
 if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
     require $maintenance;
