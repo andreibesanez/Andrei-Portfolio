@@ -31,7 +31,7 @@ class ContactMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(env('MAIL_FROM_ADDRESS', 'your-email@gmail.com'), $this->data['name']),
+            from: new Address(config('mail.from.address', config('portfolio.personal.email')), config('portfolio.personal.name')),
             replyTo: [
                 new Address($this->data['email'], $this->data['name']),
             ],

@@ -1,7 +1,7 @@
 <x-layout>
     <div class="max-w-7xl mx-auto pb-24">
         <!-- Experience Hero Section -->
-        <section class="pt-20 pb-16 px-6 md:px-12 lg:px-24 relative">
+        <section class="pt-20 pb-16 px-6 md:px-12 lg:px-24 relative" data-aos="fade-up">
             <div class="absolute right-20 top-20 opacity-20 pointer-events-none">
                 <div class="grid grid-cols-4 gap-3">
                     @for($i=0; $i<16; $i++)
@@ -25,7 +25,7 @@
                 </p>
                 
                 <div class="mt-8">
-                    <a href="#" class="inline-flex items-center justify-center gap-2 px-6 py-3 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-all text-sm font-medium shadow-sm">
+                    <a href="{{ config('portfolio.personal.resume_link') }}" target="_blank" class="inline-flex items-center justify-center gap-2 px-6 py-3 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-all text-sm font-medium shadow-sm">
                         <i data-lucide="download" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i> Download Full Resume
                     </a>
                 </div>

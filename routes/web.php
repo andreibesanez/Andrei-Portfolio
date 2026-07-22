@@ -26,4 +26,4 @@ Route::get('/experience', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
-Route::post('/contact', [ContactController::class, 'send']);
+Route::post('/contact', [ContactController::class, 'send'])->middleware('throttle:5,1');

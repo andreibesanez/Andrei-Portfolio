@@ -30,14 +30,14 @@
                 
                 <div class="pt-4 flex items-center gap-4">
                     <div class="flex items-center gap-2 text-slate-700 dark:text-slate-300 transition-colors">
-                        <i data-lucide="map-pin" class="w-5 h-5 text-blue-500"></i> Based in {{ explode(',', config('portfolio.personal.location'))[1] ?? config('portfolio.personal.location') }}
+                        <i data-lucide="map-pin" class="w-5 h-5 text-blue-500"></i> Based in {{ config('portfolio.personal.city', explode(',', config('portfolio.personal.location'))[2] ?? config('portfolio.personal.location')) }}
                     </div>
                 </div>
             </div>
             
             <div class="flex-1 relative flex justify-end">
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-slate-100 dark:bg-blue-900/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-70 transition-colors"></div>
-                <img src="{{ asset('images/profile.png') }}" alt="Z Andrie Barraba" class="relative z-10 w-[90%] lg:w-96 h-auto object-contain">
+                <img src="{{ asset('images/profile.png') }}" alt="{{ config('portfolio.personal.name') }}" class="relative z-10 w-[90%] lg:w-96 h-auto object-contain">
             </div>
         </section>
 

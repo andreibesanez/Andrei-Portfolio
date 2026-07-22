@@ -46,7 +46,7 @@
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-slate-100 dark:bg-blue-900/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-2xl opacity-70 transition-colors"></div>
                 
                 <!-- Seamless Blended Image -->
-                <img src="{{ asset('images/profile.png') }}" alt="Z Andrie Barraba" class="relative z-10 w-[90%] lg:max-w-md h-auto object-contain">
+                <img src="{{ asset('images/profile.png') }}" alt="{{ config('portfolio.personal.name') }}" class="relative z-10 w-[90%] lg:max-w-md h-auto object-contain">
             </div>
         </div>
     </section>

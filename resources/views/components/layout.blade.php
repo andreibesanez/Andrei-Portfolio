@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrei Besañez - Portfolio</title>
+    <title>{{ config('portfolio.personal.name') }} - Portfolio</title>
     <link rel="icon" type="image/png" href="{{ asset('images/profile.png') }}">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,7 +56,6 @@
             document.documentElement.classList.remove('dark')
         }
     </script>
-</head>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 antialiased selection:bg-blue-200 selection:text-blue-900 transition-colors duration-300 flex flex-col lg:flex-row min-h-screen">
 
@@ -194,7 +193,7 @@
             lucide.createIcons();
         }
 
-        themeToggleBtn.addEventListener('click', async (e) => {
+        if (themeToggleBtn) themeToggleBtn.addEventListener('click', async (e) => {
             const toggleTheme = () => {
                 document.documentElement.classList.toggle('dark');
                 const isDark = document.documentElement.classList.contains('dark');

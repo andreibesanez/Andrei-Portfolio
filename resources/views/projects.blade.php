@@ -13,7 +13,7 @@
 
             <div class="max-w-2xl z-10 relative">
                 <div class="flex items-center gap-3 mb-4">
-                    <span class="text-blue-600 dark:text-blue-500 font-semibold text-sm tracking-wide transition-colors">Hello, I'm</span>
+                    <span class="text-blue-600 dark:text-blue-500 font-semibold text-sm tracking-wide transition-colors">My Work</span>
                     <div class="h-px w-12 bg-blue-200 dark:bg-blue-800 transition-colors"></div>
                 </div>
                 

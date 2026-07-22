@@ -51,6 +51,13 @@
                     </div>
                     @endif
 
+                    @if(session('error'))
+                    <div class="mb-6 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 p-4 rounded-lg text-sm flex items-center gap-2 border border-red-200 dark:border-red-800/50 transition-colors">
+                        <i data-lucide="alert-circle" class="w-5 h-5 shrink-0"></i>
+                        {{ session('error') }}
+                    </div>
+                    @endif
+
                     <form action="/contact" method="POST" class="space-y-4">
                         @csrf
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -179,7 +186,7 @@
                         Based in {{ config('portfolio.personal.location') }}.<br>
                         Open to local and remote collaborations worldwide.
                     </p>
-                    <a href="#" class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-xs rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                    <a href="https://www.google.com/maps?q={{ config('portfolio.personal.map_lat', 6.73682) }},{{ config('portfolio.personal.map_lng', 125.37791) }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-xs rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                         View on Google Maps <i data-lucide="external-link" class="w-3 h-3"></i>
                     </a>
                 </div>
@@ -229,7 +236,7 @@
                                 });
                             });
                             
-                            observer.observe(document.documentElement, { attributes: true });
+                            observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
                         });
                     </script>
                 </div>
@@ -249,7 +256,7 @@
                     </div>
                 </div>
                 
-                <button type="button" class="shrink-0 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-colors text-sm shadow-sm flex items-center gap-2">
+                <button type="button" onclick="document.querySelector('form').scrollIntoView({behavior:'smooth'})" class="shrink-0 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-colors text-sm shadow-sm flex items-center gap-2">
                     Send Message <i data-lucide="send" class="w-4 h-4"></i>
                 </button>
             </div>
