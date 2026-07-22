@@ -14,8 +14,23 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
+    @php
+        $manifestPath = public_path('build/manifest.json');
+        $cssFile = '';
+        $jsFile = '';
+        if (file_exists($manifestPath)) {
+            $manifest = json_decode(file_get_contents($manifestPath), true);
+            $cssFile = $manifest['resources/css/app.css']['file'] ?? '';
+            $jsFile = $manifest['resources/js/app.js']['file'] ?? '';
+        }
+    @endphp
+    @if($cssFile)
+        <link rel="stylesheet" href="/build/{{ $cssFile }}">
+    @endif
+    @if($jsFile)
+        <script type="module" src="/build/{{ $jsFile }}"></script>
+    @endif
+
     <style>
         body { font-family: 'Inter', sans-serif; }
         
