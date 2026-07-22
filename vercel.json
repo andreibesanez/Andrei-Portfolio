@@ -6,11 +6,11 @@
             "runtime": "vercel-php@0.7.1"
         }
     },
-    "routes": [
-        { "handle": "filesystem" },
-        { "src": "/(.*)", "dest": "/public/$1" },
-        { "handle": "filesystem" },
-        { "src": "/(.*)", "dest": "/api/index.php" }
+    "rewrites": [
+        { "source": "/build/(.*)", "destination": "/public/build/$1" },
+        { "source": "/images/(.*)", "destination": "/public/images/$1" },
+        { "source": "/favicon.ico", "destination": "/public/favicon.ico" },
+        { "source": "/(.*)", "destination": "/api/index.php" }
     ],
     "env": {
         "APP_ENV": "production",
