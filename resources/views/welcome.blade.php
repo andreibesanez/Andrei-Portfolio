@@ -30,7 +30,7 @@
                     {{ config('portfolio.personal.bio') }}
                 </p>
                 
-                <div class="flex flex-col sm:flex-row items-center gap-4 pt-6 w-full sm:w-auto" data-aos="fade-up" data-aos-delay="300">
+                <div class="flex flex-row items-center gap-3 pt-6 w-full sm:w-auto" data-aos="fade-up" data-aos-delay="300">
                     <a href="/projects" class="flex-1 sm:flex-none justify-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 sm:px-8 sm:py-3.5 rounded-lg text-sm sm:text-base font-medium flex items-center gap-2 transition-all shadow-lg shadow-blue-500/20 whitespace-nowrap">
                         View My Work <i data-lucide="arrow-right" class="w-3 h-3 sm:w-4 sm:h-4"></i>
                     </a>
