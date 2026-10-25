@@ -1,0 +1,260 @@
+/* ==========================================================================
+   Observatory Astronomical Background System
+   Layered, GPU-accelerated, scroll-reactive celestial observatory canvas
+   ========================================================================== */
+
+.obs-astronomical-canvas-wrap {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Layer A: Deep-Space & Atmospheric Radial Foundation */
+.obs-deepspace-gradient-base {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at 25% 20%, #FAF6EE 0%, #F4EFE4 50%, #E9DFCE 100%);
+  opacity: 1;
+  transition: background var(--transition-speed) ease;
+}
+
+html.dark .obs-deepspace-gradient-base {
+  background: radial-gradient(ellipse at 25% 20%, #15253a 0%, #0c1521 45%, #05090f 100%),
+              radial-gradient(circle at 75% 70%, rgba(24, 42, 66, 0.45) 0%, transparent 65%);
+}
+
+.obs-astronomical-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* GPU Hardware-Accelerated Parallax Layers */
+.obs-layer-nebula,
+.obs-layer-stars,
+.obs-layer-constellations,
+.obs-layer-orbitals,
+.obs-layer-scientific {
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+/* Constellation Cluster Highlighting */
+.obs-constellation {
+  transition: opacity 0.3s ease;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.obs-constellation.active-cluster line {
+  stroke: var(--gold) !important;
+  stroke-width: 1.2px !important;
+  filter: drop-shadow(0 0 4px rgba(215, 189, 139, 0.6));
+}
+
+.obs-constellation.active-cluster circle {
+  fill: #ffffff !important;
+  transform: scale(1.15);
+  transform-origin: center;
+}
+
+/* Interactive Stellar Beacons */
+.obs-beacon-anchor:hover .obs-beacon-radar {
+  stroke: var(--gold);
+  stroke-width: 1.4px;
+  animation: beaconPulse 1.5s infinite ease-out;
+}
+
+.obs-beacon-anchor:hover text {
+  fill: var(--gold);
+  font-weight: 700;
+}
+
+.obs-beacon-title {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  fill: var(--brass);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: fill 0.2s ease;
+}
+
+@keyframes beaconPulse {
+  0% { r: 9px; opacity: 1; }
+  100% { r: 24px; opacity: 0; }
+}
+
+/* Constellation Labels */
+.obs-constellation-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  fill: var(--brass);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Scientific Markings & Coordinate Text */
+.obs-scientific-coord {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: var(--brass);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+/* Subtle, Gentle Twinkle Breathing Animations */
+.obs-twinkle-1 {
+  animation: celestialBreathe 5s infinite ease-in-out;
+}
+
+.obs-twinkle-2 {
+  animation: celestialBreathe 6.5s infinite ease-in-out 1.8s;
+}
+
+.obs-twinkle-3 {
+  animation: celestialBreathe 4.5s infinite ease-in-out 3.2s;
+}
+
+@keyframes celestialBreathe {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.98;
+    transform: scale(1.08);
+  }
+}
+
+/* Beacon Tooltip Popover */
+.obs-beacon-tooltip-card {
+  position: absolute;
+  transform: translate(-50%, -120%);
+  background: var(--aged-paper);
+  border: 1px solid var(--brass);
+  border-radius: 6px;
+  padding: 0.85rem 1.15rem;
+  width: 260px;
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  pointer-events: auto;
+  animation: tooltipFlyIn 0.2s ease-out;
+}
+
+.obs-beacon-tooltip-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-brass-light);
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.obs-beacon-tooltip-name {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.obs-beacon-tooltip-constellation {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--brass);
+}
+
+.obs-beacon-tooltip-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 2px;
+}
+
+.obs-beacon-tooltip-close:hover {
+  color: var(--ink);
+}
+
+.obs-beacon-tooltip-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  margin-bottom: 0.5rem;
+}
+
+.obs-b-meta-label {
+  color: var(--text-muted);
+  margin-right: 0.35rem;
+}
+
+.obs-b-meta-val {
+  color: var(--brass);
+  font-weight: 700;
+}
+
+.obs-beacon-tooltip-lore {
+  font-size: 0.775rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+@keyframes tooltipFlyIn {
+  from { opacity: 0; transform: translate(-50%, -110%); }
+  to { opacity: 1; transform: translate(-50%, -120%); }
+}
+
+/* ==========================================================================
+   Motion and Accessibility: prefers-reduced-motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .obs-twinkle-1,
+  .obs-twinkle-2,
+  .obs-twinkle-3,
+  .obs-beacon-radar {
+    animation: none !important;
+  }
+
+  .obs-layer-nebula,
+  .obs-layer-stars,
+  .obs-layer-constellations,
+  .obs-layer-orbitals,
+  .obs-layer-scientific {
+    will-change: auto !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   Mobile & Responsive Refinements
+   ========================================================================== */
+@media (max-width: 768px) {
+  .obs-constellation-label,
+  .obs-scientific-coord {
+    font-size: 7.5px;
+    opacity: 0.65;
+  }
+
+  .obs-layer-orbitals {
+    opacity: 0.75;
+  }
+
+  .obs-beacon-tooltip-card {
+    width: 220px;
+    padding: 0.65rem 0.85rem;
+  }
+}

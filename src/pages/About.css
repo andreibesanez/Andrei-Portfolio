@@ -1,0 +1,246 @@
+.obs-about-chamber {
+  padding: 5rem 1.5rem;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .obs-about-chamber {
+    padding: 7rem 2.5rem;
+  }
+}
+
+.obs-about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .obs-about-grid {
+    grid-template-columns: 1.25fr 1fr;
+    gap: 5rem;
+  }
+}
+
+.obs-about-manuscript {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.obs-about-bio-text {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.obs-about-bio-text p {
+  margin-bottom: 1.25rem;
+}
+
+/* Three Core Tenets / Inquiry Domains */
+.obs-inquiry-domains-section {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.obs-domains-caption {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.675rem;
+  letter-spacing: 0.1em;
+  color: var(--brass);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.obs-inquiry-domains-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.obs-inquiry-domain-card {
+  padding: 1.15rem 1.35rem;
+  background-color: var(--aged-paper);
+  border: 1px solid var(--border-brass);
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.obs-inquiry-domain-card:hover {
+  transform: translateX(4px);
+  border-color: var(--brass);
+  box-shadow: 0 4px 14px rgba(174, 137, 80, 0.1);
+}
+
+.obs-inquiry-domain-card.active {
+  background: linear-gradient(145deg, var(--aged-paper), var(--parchment));
+  border-color: var(--brass);
+  box-shadow: 0 6px 18px rgba(174, 137, 80, 0.16);
+}
+
+.obs-domain-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+}
+
+.obs-domain-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.obs-domain-roman {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--brass);
+}
+
+.obs-domain-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.obs-domain-tag {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--brass);
+  background: rgba(174, 137, 80, 0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  border: 1px solid rgba(174, 137, 80, 0.25);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.obs-domain-summary {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.obs-domain-deep-dive {
+  margin-top: 0.85rem;
+  animation: domainExpand 0.25s ease-out;
+}
+
+.obs-domain-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border-brass-light);
+  margin-bottom: 0.75rem;
+}
+
+.obs-domain-deep-dive p {
+  font-size: 0.875rem;
+  color: var(--ink);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+@keyframes domainExpand {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Right Side: Celestial Academy Seal & Education Box */
+.obs-about-display-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.obs-academy-card {
+  background-color: var(--aged-paper);
+  border: 1px solid var(--border-brass);
+  border-radius: 8px;
+  padding: 2.25rem;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(24, 39, 59, 0.06);
+}
+
+.obs-academy-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-brass-light);
+}
+
+.obs-academy-logo-wrap {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 1px solid var(--brass);
+  background-color: var(--parchment);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.obs-academy-logo {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.obs-academy-degree {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+
+.obs-academy-school {
+  font-family: var(--font-mono);
+  font-size: 0.775rem;
+  color: var(--brass);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.obs-academy-details {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.obs-location-plaque {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.15rem 1.5rem;
+  background-color: var(--aged-paper);
+  border: 1px solid var(--border-brass);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.775rem;
+  color: var(--text-secondary);
+}
+
+.obs-location-plaque span:last-child {
+  color: var(--brass);
+}

@@ -1,0 +1,40 @@
+.obs-layout-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: transparent;
+  position: relative;
+  /* IMPORTANT: Do NOT use overflow:hidden here — it breaks GSAP ScrollTrigger
+     pin spacers. Horizontal overflow is handled at the body level by preventing
+     scrollbars via clip, not by hiding layout. */
+}
+
+@media (min-width: 1024px) {
+  .obs-layout-shell {
+    flex-direction: row;
+  }
+}
+
+.obs-layout-main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  transition: margin-left var(--transition-speed) ease;
+}
+
+@media (min-width: 1024px) {
+  .obs-layout-main-area {
+    margin-left: 280px;
+    width: calc(100% - 280px);
+  }
+}
+
+.obs-main-viewport {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

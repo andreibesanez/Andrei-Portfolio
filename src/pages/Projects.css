@@ -1,0 +1,265 @@
+.obs-projects-chamber {
+  padding: 4rem 1.5rem 3rem;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  /* Do NOT set overflow:hidden — breaks GSAP pin spacer.
+     Do NOT set max-width:100vw — 100vw includes the sidebar width
+     and pushes content off the right edge. Use 100% instead. */
+}
+
+@media (min-width: 768px) {
+  .obs-projects-chamber {
+    padding: 3rem 2.5rem 2rem;
+  }
+}
+
+/* When GSAP pins this section it gets position:fixed.
+   Make it fill the viewport height so cards can be vertically centered. */
+@media (min-width: 768px) {
+  .obs-projects-chamber.pin-spacer,
+  .obs-projects-chamber[style*="position: fixed"] {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.obs-projects-header-wrap {
+  max-width: 1240px;
+  margin: 0 auto 1.5rem;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Control Bar: Filters & Gauge */
+.obs-folio-control-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-brass);
+}
+
+@media (min-width: 860px) {
+  .obs-folio-control-bar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.obs-folio-filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.obs-filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background-color: var(--aged-paper);
+  border: 1px solid var(--border-brass);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0.45rem 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+}
+
+.obs-filter-pill:hover {
+  border-color: var(--brass);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.obs-filter-pill.active {
+  background-color: var(--brass);
+  border-color: var(--brass);
+  color: #FFFFFF;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(174, 137, 80, 0.25);
+}
+
+/* Gauge Needle & Indicator */
+.obs-folio-gauge-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.obs-folio-index-label {
+  font-family: var(--font-mono);
+  font-size: 0.725rem;
+  letter-spacing: 0.08em;
+  color: var(--brass);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.obs-folio-gauge-rail {
+  width: 120px;
+  height: 4px;
+  background-color: var(--aged-paper);
+  border: 1px solid var(--border-brass);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.obs-folio-gauge-needle {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brass), var(--gold));
+  border-radius: 2px;
+  transition: width 0.15s ease-out;
+}
+
+.obs-folio-glide-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.obs-glide-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: var(--aged-paper);
+  border: 1px solid var(--border-brass);
+  border-radius: 50%;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+}
+
+.obs-glide-btn:hover:not(:disabled) {
+  background-color: var(--brass);
+  border-color: var(--brass);
+  color: #FFFFFF;
+  transform: scale(1.08);
+}
+
+.obs-glide-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Track Viewport & Slides */
+.obs-projects-track-viewport {
+  width: 100%;
+  position: relative;
+  /* On desktop when pinned, this area expands to fill the remaining
+     viewport height below the header, and vertically centers cards. */
+}
+
+@media (min-width: 768px) {
+  .obs-projects-track-viewport {
+    overflow: visible;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Mobile swipe mode */
+@media (max-width: 767px) {
+  .obs-projects-track-viewport {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 1rem 0 2rem;
+  }
+}
+
+.obs-projects-track {
+  display: flex;
+  align-items: stretch;
+  gap: 2rem;
+  width: max-content;
+  padding-left: 1.5rem;
+  padding-right: 2.5rem;
+  will-change: transform;
+}
+
+@media (min-width: 768px) {
+  .obs-projects-track {
+    padding-left: 2.5rem;
+    gap: 2.5rem;
+  }
+}
+
+.obs-project-slide {
+  width: 85vw;
+  max-width: 420px;
+  min-width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  scroll-snap-align: center;
+}
+
+@media (min-width: 768px) {
+  .obs-project-slide {
+    width: 400px;
+  }
+
+  .obs-project-slide.focused {
+    transform: scale(1.03);
+  }
+}
+
+.obs-collab-slide {
+  width: 85vw;
+  max-width: 480px;
+  min-width: 320px;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .obs-collab-slide {
+    width: 480px;
+  }
+}
+
+/* Call to Collaboration Plaque */
+.obs-projects-collab-plaque {
+  background-color: var(--aged-paper);
+  border: 1px solid var(--border-brass);
+  border-radius: 8px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(24, 39, 59, 0.05);
+  width: 100%;
+}
+
+.obs-collab-text-wrap {
+  max-width: 580px;
+}
+
+.obs-collab-title {
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+
+.obs-collab-desc {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}

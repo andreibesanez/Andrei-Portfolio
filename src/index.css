@@ -1,0 +1,260 @@
+:root {
+  /* Classical Observatory Color Palette */
+  --parchment: #F4EFE4;       /* Primary warm background */
+  --aged-paper: #E9DFCE;      /* Card / panel background */
+  --navy: #18273B;            /* Deep midnight navy accent */
+  --brass: #AE8950;           /* Antique brass accent & borders */
+  --gold: #D7BD8B;            /* Muted celestial gold */
+  --ink: #292A27;             /* Charcoal ink primary text */
+  --text-secondary: #525350;  /* Secondary readable ink */
+  --text-muted: #7f817c;      /* Muted catalog note text */
+  
+  --border-brass: rgba(174, 137, 80, 0.35);
+  --border-brass-light: rgba(174, 137, 80, 0.18);
+  --celestial-ring: rgba(24, 39, 59, 0.55);
+  
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(41, 42, 39, 0.05);
+  --shadow-md: 0 8px 24px rgba(41, 42, 39, 0.08);
+  --shadow-lg: 0 16px 40px rgba(24, 39, 59, 0.12);
+
+  --transition-speed: 0.3s;
+}
+
+html.dark {
+  /* Midnight Sky Observation Mode */
+  --parchment: #0c1521;
+  --aged-paper: #121e2e;
+  --navy: #223751;
+  --brass: #c9a367;
+  --gold: #e2cca1;
+  --ink: #F4EFE4;
+  --text-secondary: #c5beaf;
+  --text-muted: #8e887c;
+
+  --border-brass: rgba(201, 163, 103, 0.35);
+  --border-brass-light: rgba(201, 163, 103, 0.15);
+  --celestial-ring: rgba(215, 189, 139, 0.55);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.65);
+}
+
+/* Base Resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* On mobile: offset for the sticky top header (~55px) + small gap */
+  scroll-padding-top: 65px;
+  font-family: var(--font-sans);
+  background-color: var(--parchment);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* On desktop the sidebar is on the LEFT — no top bar — so no scroll-padding needed */
+@media (min-width: 1024px) {
+  html {
+    scroll-padding-top: 24px;
+  }
+}
+
+body {
+  background-color: var(--parchment);
+  color: var(--ink);
+  min-height: 100vh;
+  line-height: 1.65;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+  /* Use overflow-x: clip (not hidden) — clip does not create a new block formatting
+     context and does NOT break GSAP ScrollTrigger pin spacers the way hidden does. */
+  overflow-x: clip;
+}
+
+/* Classical Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--ink);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Ornamental Rules and Section Markers */
+.obs-section-header {
+  margin-bottom: 3.5rem;
+  max-width: 720px;
+}
+
+.obs-catalog-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--brass);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.obs-catalog-tag::before {
+  content: '✦';
+  font-size: 0.8rem;
+  color: var(--gold);
+}
+
+.obs-section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+.obs-section-subtitle {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* Brass Buttons */
+.btn-brass-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background-color: var(--navy);
+  color: #ffffff;
+  border: 1px solid var(--brass);
+  padding: 0.85rem 1.8rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: all var(--transition-speed) ease;
+  box-shadow: 0 4px 14px rgba(24, 39, 59, 0.2);
+}
+
+.btn-brass-primary:hover {
+  background-color: var(--brass);
+  border-color: var(--gold);
+  color: #18273B;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(174, 137, 80, 0.3);
+}
+
+html.dark .btn-brass-primary:hover {
+  color: #0c1521;
+}
+
+/* Global Ornamental Corner Brackets */
+.obs-card-bracket-tl,
+.obs-card-bracket-tr,
+.obs-card-bracket-bl,
+.obs-card-bracket-br {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: var(--brass);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.obs-card-bracket-tl { top: 6px; left: 6px; border-top: 1px solid; border-left: 1px solid; }
+.obs-card-bracket-tr { top: 6px; right: 6px; border-top: 1px solid; border-right: 1px solid; }
+.obs-card-bracket-bl { bottom: 6px; left: 6px; border-bottom: 1px solid; border-left: 1px solid; }
+.obs-card-bracket-br { bottom: 6px; right: 6px; border-bottom: 1px solid; border-right: 1px solid; }
+
+.btn-parchment-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background-color: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border-brass);
+  padding: 0.85rem 1.8rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: all var(--transition-speed) ease;
+}
+
+.btn-parchment-secondary:hover {
+  background-color: var(--aged-paper);
+  border-color: var(--brass);
+  color: var(--brass);
+  transform: translateY(-2px);
+}
+
+/* Classical Flourish Rule */
+.obs-divider-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 5rem 0;
+  opacity: 0.6;
+}
+
+.obs-divider-rule::before,
+.obs-divider-rule::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(to right, transparent, var(--border-brass), transparent);
+}
+
+.obs-divider-rule span {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--brass);
+  letter-spacing: 0.2em;
+}
+
+/* Page Section Container */
+.obs-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .obs-container {
+    padding: 6rem 2.5rem;
+  }
+}

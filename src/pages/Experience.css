@@ -1,0 +1,262 @@
+.obs-exp-chamber {
+  padding: 5rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .obs-exp-chamber {
+    padding: 7rem 2.5rem;
+  }
+}
+
+.obs-chronicle-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 3.5rem;
+}
+
+.obs-chronicle-axis {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--brass), var(--border-brass), transparent);
+}
+
+@media (min-width: 768px) {
+  .obs-chronicle-axis {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.obs-chronicle-entry {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-left: 55px;
+}
+
+@media (min-width: 768px) {
+  .obs-chronicle-entry {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-left: 0;
+  }
+
+  .obs-chronicle-entry.reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+/* Brass Astrolabe Node */
+.obs-chronicle-node {
+  position: absolute;
+  left: 20px;
+  top: 1.25rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--aged-paper);
+  border: 2px solid var(--brass);
+  transform: translateX(-50%);
+  z-index: 10;
+  transition: transform var(--transition-speed) ease, background-color var(--transition-speed) ease;
+}
+
+.obs-chronicle-entry:hover .obs-chronicle-node {
+  transform: translateX(-50%) scale(1.4);
+  background-color: var(--brass);
+}
+
+@media (min-width: 768px) {
+  .obs-chronicle-node {
+    left: 50%;
+  }
+}
+
+/* Side 1: Header Info */
+.obs-chronicle-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+@media (min-width: 768px) {
+  .obs-chronicle-meta {
+    width: 44%;
+    padding-top: 0.5rem;
+  }
+
+  .obs-chronicle-entry:not(.reverse) .obs-chronicle-meta {
+    text-align: right;
+    padding-right: 2.5rem;
+  }
+
+  .obs-chronicle-entry.reverse .obs-chronicle-meta {
+    text-align: left;
+    padding-left: 2.5rem;
+  }
+}
+
+.obs-chronicle-role {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.obs-chronicle-org {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--brass);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.obs-chronicle-dates {
+  font-family: var(--font-mono);
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+.obs-chronicle-status-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  width: fit-content;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.obs-chronicle-status-badge.current {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.obs-chronicle-status-badge.completed {
+  background: rgba(174, 137, 80, 0.1);
+  color: var(--brass);
+  border: 1px solid rgba(174, 137, 80, 0.25);
+}
+
+@media (min-width: 768px) {
+  .obs-chronicle-entry:not(.reverse) .obs-chronicle-status-badge {
+    margin-left: auto;
+  }
+}
+
+.obs-chronicle-expand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.725rem;
+  color: var(--brass);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.35rem 0;
+  margin-bottom: 0.85rem;
+  transition: color 0.2s ease;
+}
+
+.obs-chronicle-expand-btn:hover {
+  color: var(--gold);
+}
+
+.obs-chronicle-deliverables-panel {
+  padding: 0.85rem 1rem;
+  background: var(--parchment);
+  border: 1px solid var(--border-brass-light);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  animation: deliverableSlide 0.25s ease-out;
+}
+
+@keyframes deliverableSlide {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Side 2: Manuscript Card */
+.obs-chronicle-card {
+  background-color: var(--aged-paper);
+  border: 1px solid var(--border-brass);
+  border-radius: 8px;
+  padding: 1.75rem;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(24, 39, 59, 0.04);
+}
+
+@media (min-width: 768px) {
+  .obs-chronicle-card-wrap {
+    width: 44%;
+  }
+
+  .obs-chronicle-entry:not(.reverse) .obs-chronicle-card-wrap {
+    padding-left: 2.5rem;
+  }
+
+  .obs-chronicle-entry.reverse .obs-chronicle-card-wrap {
+    padding-right: 2.5rem;
+  }
+}
+
+.obs-chronicle-desc {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.obs-chronicle-bullet-points {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+  list-style: none;
+}
+
+.obs-chronicle-pt {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.obs-chronicle-pt::before {
+  content: '✦';
+  font-size: 0.65rem;
+  color: var(--brass);
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+.obs-chronicle-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.obs-chronicle-tag {
+  font-family: var(--font-mono);
+  font-size: 0.675rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 3px;
+  background-color: var(--parchment);
+  color: var(--text-muted);
+  border: 1px solid var(--border-brass-light);
+}
