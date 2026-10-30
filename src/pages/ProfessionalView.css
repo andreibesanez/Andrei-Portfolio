@@ -1,0 +1,235 @@
+/* ==========================================================================
+   PROFESSIONAL VIEW (CV / RESUME LAYOUT FOR RECRUITERS)
+   ========================================================================== */
+
+.pro-view-wrapper {
+  min-height: 100vh;
+  background: #FDFDFD;
+  color: var(--text-main);
+  padding-bottom: 5rem;
+}
+
+.pro-view-header {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-light);
+  z-index: 100;
+  padding: 0.9rem 1.5rem;
+}
+
+.pro-header-container {
+  max-width: 820px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pro-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.pro-back-btn:hover {
+  color: var(--accent-sage);
+}
+
+.pro-download-btn {
+  padding: 0.5rem 1.1rem;
+  font-size: 0.85rem;
+}
+
+/* Document Body */
+.pro-document-container {
+  max-width: 820px;
+  margin: 2.5rem auto 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.pro-candidate-header {
+  padding-bottom: 1.8rem;
+  border-bottom: 2px solid var(--border-dark);
+}
+
+.pro-name {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-main);
+  margin-bottom: 0.2rem;
+}
+
+.pro-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent-sage);
+  margin-bottom: 0.5rem;
+}
+
+.pro-location {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.pro-socials {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.pro-socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pro-socials a:hover {
+  color: var(--accent-sage);
+  text-decoration: underline;
+}
+
+/* Sections */
+.pro-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.pro-sec-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 0.45rem;
+}
+
+.pro-sec-icon {
+  color: var(--accent-sage);
+}
+
+.pro-section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.pro-summary-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.pro-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.pro-entry-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.pro-entry-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.pro-category-tag {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--accent-sage);
+  font-weight: 500;
+}
+
+.pro-entry-date {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.pro-entry-sub {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.pro-entry-desc {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.pro-bullet-list {
+  margin-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.pro-tech-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.pro-chip {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-xs);
+  color: var(--text-secondary);
+}
+
+/* Skills Table */
+.pro-skills-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.1rem;
+}
+
+.skills-row {
+  display: flex;
+  gap: 0.85rem;
+  font-size: 0.88rem;
+}
+
+.skills-row-label {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-main);
+  min-width: 130px;
+}
+
+.skills-row-content {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}

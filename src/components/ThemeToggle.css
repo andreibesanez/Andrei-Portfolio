@@ -1,0 +1,148 @@
+/* ==========================================================================
+   THEME TOGGLE DOCK PILL & COSMIC SHOCKWAVE EFFECT
+   ========================================================================== */
+
+.theme-toggle-dock-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-full);
+  padding: 0.52rem 1.05rem;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text-main);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.theme-toggle-dock-pill:hover {
+  border-color: var(--accent-sage);
+  color: var(--accent-sage);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.theme-toggle-slider {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+}
+
+.sun-icon {
+  color: #D97706; /* Warm amber */
+  transform: scale(1) rotate(0deg);
+  opacity: 1;
+}
+
+.moon-icon {
+  color: #38B2AC; /* Celestial turquoise */
+  transform: scale(0.4) rotate(-90deg);
+  opacity: 0;
+}
+
+/* Dark mode active states */
+.dark-mode-active .sun-icon {
+  transform: scale(0.4) rotate(90deg);
+  opacity: 0;
+}
+
+.dark-mode-active .moon-icon {
+  transform: scale(1) rotate(0deg);
+  opacity: 1;
+}
+
+.dark-mode-active {
+  background: #1A202C;
+  border-color: #2D3748;
+  color: #E2E8F0;
+}
+
+.theme-label-text {
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+
+.theme-sparkle-indicator {
+  display: flex;
+  align-items: center;
+  color: var(--accent-sage);
+}
+
+.animating .sparkle-svg {
+  animation: sparkleTwirl 0.8s ease forwards;
+}
+
+@keyframes sparkleTwirl {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.6) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+
+/* ==========================================================================
+   COSMIC SHOCKWAVE EXPANSION EFFECT
+   ========================================================================== */
+
+.cosmic-theme-wave {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%) scale(0);
+  animation: cosmicExpand 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.cosmic-theme-wave.to-dark {
+  background: radial-gradient(circle, rgba(22, 27, 34, 0.95) 0%, rgba(14, 17, 23, 0.98) 70%, transparent 100%);
+  box-shadow: 0 0 80px rgba(56, 178, 172, 0.4);
+}
+
+.cosmic-theme-wave.to-light {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.96) 0%, rgba(249, 249, 247, 0.98) 70%, transparent 100%);
+  box-shadow: 0 0 80px rgba(217, 119, 6, 0.3);
+}
+
+@keyframes cosmicExpand {
+  0% {
+    width: 0px;
+    height: 0px;
+    opacity: 0.85;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  60% {
+    width: 250vmax;
+    height: 250vmax;
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    width: 280vmax;
+    height: 280vmax;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+@media (max-width: 860px) {
+  .theme-toggle-dock-pill {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.78rem;
+  }
+}

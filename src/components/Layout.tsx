@@ -1,30 +1,26 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { ObservatoryNav } from './ObservatoryNav';
+import { Navbar } from './Navbar';
 import { Footer } from './Footer';
-import { CompassReturn } from './CompassReturn';
-import { ObservatoryBackground } from './ObservatoryBackground';
-import { DiscoveryProvider } from '../context/DiscoveryContext';
-import { DiscoveryHUD } from './DiscoveryHUD';
-import { DiscoveryJournalModal } from './DiscoveryJournalModal';
+import { BackgroundParallax } from './BackgroundParallax';
 import './Layout.css';
 
 export const Layout: React.FC = () => {
   return (
-    <DiscoveryProvider>
-      <div className="obs-layout-shell">
-        <ObservatoryBackground />
-        <ObservatoryNav />
-        <div className="obs-layout-main-area">
-          <main className="obs-main-viewport">
-            <Outlet />
-          </main>
-          <Footer />
-        </div>
-        <CompassReturn />
-        <DiscoveryHUD />
-        <DiscoveryJournalModal />
-      </div>
-    </DiscoveryProvider>
+    <div className="modern-layout-shell">
+      {/* Scroll-Reactive Ambient Background */}
+      <BackgroundParallax />
+
+      {/* Modern Floating Navbar */}
+      <Navbar />
+
+      {/* Main Page Content */}
+      <main className="modern-main-content">
+        <Outlet />
+      </main>
+
+      {/* Footer */}
+      <Footer />
+    </div>
   );
 };

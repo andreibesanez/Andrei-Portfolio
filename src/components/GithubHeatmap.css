@@ -1,0 +1,105 @@
+/* ==========================================================================
+   GITHUB CONTRIBUTION HEATMAP
+   ========================================================================== */
+
+.github-heatmap-container {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.1rem;
+  margin-top: 1.4rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.heatmap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.heatmap-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text-main);
+}
+
+.heatmap-icon {
+  color: var(--accent-sage);
+}
+
+.heatmap-profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--accent-sage);
+  font-weight: 500;
+  transition: opacity var(--transition-fast);
+}
+
+.heatmap-profile-link:hover {
+  text-decoration: underline;
+}
+
+.heatmap-scroll-area {
+  overflow-x: auto;
+  padding-bottom: 0.4rem;
+}
+
+.heatmap-grid {
+  display: flex;
+  gap: 3.5px;
+  min-width: 580px;
+}
+
+.heatmap-column {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px;
+}
+
+.heatmap-cell {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  background: #EBEDF0;
+  transition: transform 0.15s ease;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.25);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Authentic GitHub green / sage shades */
+.heatmap-cell.level-0 { background: #EBEDF0; }
+.heatmap-cell.level-1 { background: #9BE9A8; }
+.heatmap-cell.level-2 { background: #40C463; }
+.heatmap-cell.level-3 { background: #30A14E; }
+.heatmap-cell.level-4 { background: #216E39; }
+
+/* Legend */
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.legend-cell {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+.legend-cell.level-0 { background: #EBEDF0; }
+.legend-cell.level-1 { background: #9BE9A8; }
+.legend-cell.level-2 { background: #40C463; }
+.legend-cell.level-3 { background: #30A14E; }
+.legend-cell.level-4 { background: #216E39; }

@@ -1,0 +1,111 @@
+.desk-container {
+  width: 100%;
+  max-width: 680px;
+  margin: 1.5rem auto 1rem auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.desk-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Tooltip bubble appearing above hovered object */
+.desk-tooltip-bubble {
+  position: absolute;
+  top: -24px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-main);
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  padding: 0.28rem 0.75rem;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+  animation: fadeInTooltip 0.18s ease-out forwards;
+  z-index: 10;
+}
+
+@keyframes fadeInTooltip {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Interactive SVG Items */
+.interactive-desk-item {
+  cursor: pointer;
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+  outline: none;
+}
+
+.interactive-desk-item:hover,
+.interactive-desk-item:focus-visible {
+  transform: translateY(-4px);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
+}
+
+.desk-sticky:hover {
+  transform: translateY(-5px) rotate(2deg);
+}
+
+/* Terminal Cursor Blink */
+.cursor-blink {
+  animation: blinkCursor 1s step-end infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Coffee Steam */
+.steam-line {
+  animation: steamRise 2.4s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+.steam-2 {
+  animation-delay: 1.2s;
+}
+
+@keyframes steamRise {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+}
+
+/* Lamp Glow flicker */
+.lamp-glow {
+  transition: opacity 0.3s ease;
+}
+
+.desk-lamp:hover .lamp-glow {
+  fill: rgba(254, 240, 138, 0.3);
+}
+
+@media (max-width: 640px) {
+  .desk-container {
+    max-width: 95%;
+    margin-top: 1rem;
+  }
+}

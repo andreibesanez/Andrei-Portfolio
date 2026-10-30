@@ -1,84 +1,37 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Home } from './Home';
+import { Hero } from './Hero';
 import { About } from './About';
-import { Skills } from './Skills';
 import { Projects } from './Projects';
+import { Skills } from './Skills';
 import { Experience } from './Experience';
 import { Contact } from './Contact';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const ObservatoryView: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    // After all sections mount and the sidebar has shifted the layout,
-    // give the browser one paint tick then refresh all ScrollTrigger instances
-    // so their trigger offsets are measured correctly.
-    const refreshTimer = setTimeout(() => {
+    // Refresh ScrollTrigger instances once mounted
+    const timer = setTimeout(() => {
       ScrollTrigger.refresh(true);
-    }, 200);
+    }, 150);
 
-    const ctx = gsap.context(() => {
-      const dividers = gsap.utils.toArray<HTMLElement>('.obs-divider-rule');
-      dividers.forEach((div) => {
-        const star = div.querySelector('span');
-        if (star) {
-          gsap.from(star, {
-            scale: 0.4,
-            rotation: -60,
-            opacity: 0,
-            duration: 0.9,
-            ease: 'back.out(2)',
-            scrollTrigger: {
-              trigger: div,
-              start: 'top 90%'
-            }
-          });
-        }
-      });
-    }, containerRef);
-
-    return () => {
-      ctx.revert();
-      clearTimeout(refreshTimer);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
+  const handleNav = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <div ref={containerRef}>
-      <Home />
-
-      <div className="obs-divider-rule">
-        <span>✦ • ✦ • ✦</span>
-      </div>
-
-      <About />
-
-      <div className="obs-divider-rule">
-        <span>✦ • ✦ • ✦</span>
-      </div>
-
-      <Skills />
-
-      <div className="obs-divider-rule">
-        <span>✦ • ✦ • ✦</span>
-      </div>
-
+    <div className="portfolio-content-stream">
+      <Hero onNavigateSection={handleNav} />
+      <About onNavigateSection={handleNav} />
       <Projects />
-
-      <div className="obs-divider-rule">
-        <span>✦ • ✦ • ✦</span>
-      </div>
-
+      <Skills />
       <Experience />
-
-      <div className="obs-divider-rule">
-        <span>✦ • ✦ • ✦</span>
-      </div>
-
       <Contact />
     </div>
   );

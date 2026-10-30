@@ -29,7 +29,7 @@ export const InteractiveMap: React.FC<MapProps> = ({ lat, lng }) => {
 
     mapRef.current = map;
 
-    // Create antique brass pulsing pin element
+    // Create modern glowing map pin
     const markerEl = document.createElement('div');
     markerEl.style.position = 'relative';
     markerEl.style.display = 'flex';
@@ -43,7 +43,7 @@ export const InteractiveMap: React.FC<MapProps> = ({ lat, lng }) => {
     ping.style.width = '100%';
     ping.style.height = '100%';
     ping.style.borderRadius = '50%';
-    ping.style.backgroundColor = '#D7BD8B';
+    ping.style.backgroundColor = '#06b6d4';
     ping.style.opacity = '0.75';
     ping.style.animation = 'ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite';
 
@@ -52,9 +52,9 @@ export const InteractiveMap: React.FC<MapProps> = ({ lat, lng }) => {
     dot.style.width = '14px';
     dot.style.height = '14px';
     dot.style.borderRadius = '50%';
-    dot.style.backgroundColor = '#AE8950';
-    dot.style.border = '2px solid #F4EFE4';
-    dot.style.boxShadow = '0 2px 6px rgba(24, 39, 59, 0.4)';
+    dot.style.backgroundColor = '#3b82f6';
+    dot.style.border = '2px solid #ffffff';
+    dot.style.boxShadow = '0 0 12px rgba(59, 130, 246, 0.6)';
 
     markerEl.appendChild(ping);
     markerEl.appendChild(dot);

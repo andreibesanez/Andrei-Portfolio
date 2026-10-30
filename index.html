@@ -1,41 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Andrei Besañez — The Classical Observatory</title>
+    <title>Andrei Besañez — Web Developer & IT Scholar</title>
     
     <link rel="icon" type="image/png" href="/images/pfp.png" sizes="any" />
     
-    <!-- Fonts: Cormorant Garamond (Classical Headings), DM Sans (Body), DM Mono (Technical Coordinates/Labels) -->
+    <!-- Clean Modern Typography: Inter + Space Grotesk + JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="A curious mind, building for tomorrow. The personal portfolio and digital observatory of Andrei Besañez, IT student and web developer exploring thoughtful code and interface design." />
+    <meta name="description" content="Andrei Besañez — Personal Portfolio. Information Technology scholar and developer based in the Philippines, engineering modern web applications, scalable APIs, and intuitive user experiences." />
     <meta name="author" content="Andrei Besañez" />
-    <meta name="keywords" content="Andrei Besañez, web developer, portfolio, classical observatory, React, Vite, GSAP, Philippines" />
-    <meta property="og:title" content="Andrei Besañez — The Classical Observatory" />
-    <meta property="og:description" content="A curious mind, building for tomorrow. The personal portfolio and digital observatory of Andrei Besañez." />
+    <meta name="keywords" content="Andrei Besañez, web developer, portfolio, React, Vite, GSAP, TypeScript, Laravel, Philippines" />
+    <meta property="og:title" content="Andrei Besañez — Web Developer & IT Scholar" />
+    <meta property="og:description" content="A curious mind, building for tomorrow. Designing and engineering modern web products with precision." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/images/pfp.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Andrei Besañez — The Classical Observatory" />
-    <meta name="twitter:description" content="A curious mind, building for tomorrow. The personal portfolio and digital observatory of Andrei Besañez." />
+    <meta name="twitter:title" content="Andrei Besañez — Web Developer" />
+    <meta name="twitter:description" content="Designing and engineering modern web products with precision." />
     <meta name="twitter:image" content="/images/pfp.png" />
 
     <!-- MapLibre CSS -->
     <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
 
-    <!-- Inline script to prevent theme flash -->
+    <!-- Inline theme script to prevent flash -->
     <script>
       (function() {
         const storedTheme = localStorage.getItem('theme');
-        if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-          document.documentElement.classList.add('dark');
-        } else {
+        if (storedTheme === 'light') {
           document.documentElement.classList.remove('dark');
+          document.documentElement.classList.add('light');
+        } else {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light');
         }
       })();
     </script>

@@ -1,0 +1,157 @@
+/* ==========================================================================
+   HOMEPAGE HERO SECTION — ILLUSTRATED PERSONAL WORKSPACE
+   ========================================================================== */
+
+.workspace-hero-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 1.5rem 3rem 1.5rem;
+  position: relative;
+  text-align: center;
+}
+
+.workspace-hero-container {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Greeting Typography */
+.hero-intro-header {
+  margin-bottom: 0.5rem;
+}
+
+.hero-eyebrow-greeting {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.01em;
+}
+
+.hero-author-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.03em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  line-height: 1.15;
+  margin-bottom: 0.85rem;
+}
+
+.hero-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent-sage);
+}
+
+.hero-tagline-text {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: var(--text-secondary);
+  max-width: 620px;
+  line-height: 1.6;
+  margin: 0 auto;
+}
+
+.highlight-role {
+  color: var(--text-main);
+  font-weight: 600;
+  border-bottom: 1.5px solid var(--accent-sage);
+}
+
+/* Meta row (Location & Socials) */
+.hero-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.hero-location-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-muted);
+}
+
+.pin-icon {
+  color: var(--accent-sage);
+}
+
+.hero-social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.hero-social-item {
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.hero-social-item:hover {
+  color: var(--accent-sage);
+  text-decoration: underline;
+}
+
+.dot-sep {
+  color: var(--border-light);
+}
+
+/* Scroll down indicator */
+.hero-scroll-indicator {
+  margin-top: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.05em;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.hero-scroll-indicator:hover {
+  color: var(--accent-sage);
+  transform: translateY(3px);
+}
+
+.scroll-chevron {
+  animation: bounceDown 2s infinite ease-in-out;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+@media (max-width: 640px) {
+  .workspace-hero-section {
+    padding-top: 4.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero-meta-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

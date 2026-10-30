@@ -1,0 +1,196 @@
+/* ==========================================================================
+   WORKSPACE SHELL LAYOUT & GSAP SCROLLSMOOTHER
+   ========================================================================== */
+
+.workspace-main-shell {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* GSAP ScrollSmoother Viewport & Content Containers */
+#smooth-wrapper {
+  overflow: hidden;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#smooth-content {
+  overflow: visible;
+  width: 100%;
+}
+
+/* Global ScrollSmoother Progress Line (Top Screen) */
+.smoother-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-sage) 0%, #10B981 100%);
+  transform-origin: left center;
+  z-index: 1000;
+  pointer-events: none;
+  transition: transform 0.08s linear;
+}
+
+/* Top Navigation Bar: Spans comfortably across header with clean flex distribution */
+.workspace-top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 920;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(249, 249, 247, 0.85) 0%, rgba(249, 249, 247, 0) 100%);
+  backdrop-filter: blur(8px);
+}
+
+html.dark .workspace-top-bar {
+  background: linear-gradient(180deg, rgba(14, 17, 23, 0.85) 0%, rgba(14, 17, 23, 0) 100%);
+}
+
+/* Monogram Logo */
+.workspace-brand-monogram {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  background: var(--bg-surface);
+  backdrop-filter: blur(12px);
+  padding: 0.55rem 1.05rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.workspace-brand-monogram:hover {
+  border-color: var(--accent-sage);
+  color: var(--accent-sage);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.brand-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-sage);
+}
+
+/* Top Right Actions Hub: Organized horizontal cluster with generous gap & sizing */
+.workspace-top-actions {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+/* Real-time Velocity Badge */
+.smoother-velocity-badge {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--accent-sage);
+  background: var(--accent-light);
+  border: 1px solid var(--accent-border);
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-full);
+  animation: fadeIn 0.15s ease-out;
+  white-space: nowrap;
+}
+
+/* Professional View Button: Larger, more legible and clearly styled */
+.pro-view-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text-main);
+  background: var(--bg-surface);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid var(--border-light);
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.pro-view-toggle-btn:hover {
+  color: var(--accent-sage);
+  border-color: var(--accent-sage);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.pro-arrow {
+  color: var(--accent-sage);
+  transition: transform var(--transition-fast);
+}
+
+.pro-view-toggle-btn:hover .pro-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* Stream of Sections */
+.workspace-content-stream {
+  position: relative;
+  z-index: 10;
+  padding-top: 2rem;
+}
+
+/* Footer */
+.workspace-footer {
+  text-align: center;
+  padding: 4rem 1.5rem 6rem 1.5rem;
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  font-family: var(--font-mono);
+}
+
+.footer-line {
+  font-size: 0.88rem;
+  color: var(--text-main);
+  margin-bottom: 0.35rem;
+}
+
+.footer-sub {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 860px) {
+  .workspace-top-bar {
+    padding: 0 1rem;
+    height: 64px;
+  }
+  .workspace-top-actions {
+    gap: 0.5rem;
+  }
+  .pro-view-toggle-btn {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.78rem;
+  }
+  .workspace-brand-monogram {
+    font-size: 1.05rem;
+    padding: 0.45rem 0.85rem;
+  }
+}

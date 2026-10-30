@@ -1,221 +1,242 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { MapPin, Compass } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useRef, useEffect } from 'react';
+import { User, GraduationCap, MapPin, ArrowRight } from 'lucide-react';
+import { gsap } from 'gsap';
+import { Draggable } from 'gsap/Draggable';
+import { InertiaPlugin } from 'gsap/InertiaPlugin';
+import { Flip } from 'gsap/Flip';
+import { Observer } from 'gsap/Observer';
+import { GithubHeatmap } from '../components/GithubHeatmap';
 import { portfolioData } from '../data/portfolioData';
-import { DiscoveryMarker } from '../components/DiscoveryMarker';
 import './About.css';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(Draggable, InertiaPlugin, Flip, Observer);
 
-interface InquiryDomain {
-  id: string;
-  roman: string;
-  symbol: string;
-  title: string;
-  tag: string;
-  summary: string;
-  deepDive: string;
+interface AboutProps {
+  onNavigateSection?: (sectionId: string) => void;
 }
 
-const INQUIRY_DOMAINS: InquiryDomain[] = [
-  {
-    id: 'interface',
-    roman: 'I.',
-    symbol: '✦',
-    title: 'Interface Craftsmanship',
-    tag: 'Design Tokens & Responsiveness',
-    summary: 'Balancing classical typographic discipline with responsive modern CSS architecture.',
-    deepDive: 'I build user interfaces using custom CSS variables, semantic HTML, and fluid layouts. Every screen is designed as an accessible document where visual hierarchy and text legibility serve human readers first.'
-  },
-  {
-    id: 'relational',
-    roman: 'II.',
-    symbol: '✧',
-    title: 'Relational & Backend Data',
-    tag: 'Database Architecture & APIs',
-    summary: 'Structuring normalized database schemas and reliable RESTful API communication.',
-    deepDive: 'Focusing on clean schema design across MySQL, SQLite, and PostgreSQL. From building full-stack guestbook APIs in Express to writing controllers in Laravel, I prioritize data integrity and straightforward CRUD endpoints.'
-  },
-  {
-    id: 'blockchain',
-    roman: 'III.',
-    symbol: '✣',
-    title: 'Decentralized Auditability',
-    tag: 'Public Ledgers & Smart Contracts',
-    summary: 'Exploring blockchain technology to solve real institutional transparency challenges in the Philippines.',
-    deepDive: 'Through capstone work on Chainbudget and hackathon prototyping with 4Ps-Nexus on Stellar Soroban, I explore how immutable distributed ledgers can provide verifiable, tamper-proof auditing for student and public funds.'
-  },
-  {
-    id: 'documentation',
-    roman: 'IV.',
-    symbol: '❂',
-    title: 'System Documentation as Craft',
-    tag: 'Blueprints & Technical Writing',
-    summary: 'Authoring architectural blueprints, user manuals, and technical research chapters.',
-    deepDive: 'Serving as the Documentation Specialist for our capstone instilled a deep respect for clear system manuals. Writing precise technical documentation ensures systems outlive their initial sprint cycles and remain maintainable.'
-  }
-];
+export const About: React.FC<AboutProps> = () => {
+  const { personal, socials } = portfolioData;
 
-export const About: React.FC = () => {
+  const imageRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [selectedDomain, setSelectedDomain] = useState<string>('interface');
-  const { personal } = portfolioData;
+  const isEnlargedRef = useRef(false);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // 1. Entrance animation triggered on scroll
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 80%'
-        }
-      });
+    const imgEl = imageRef.current;
+    const contEl = containerRef.current;
+    if (!imgEl || !contEl) return;
 
-      tl.from('.obs-about-manuscript', {
-        x: -80,
-        opacity: 0,
-        duration: 0.9,
-        ease: 'power3.out'
-      }, 0);
+    // 1. DRAGGABLE & INERTIA: Make Andrei's cut-out avatar tossable with momentum
+    const dragInstance = Draggable.create(imgEl, {
+      type: 'x,y',
+      bounds: contEl,
+      edgeResistance: 0.65,
+      inertia: true,
+      cursor: 'grab',
+      activeCursor: 'grabbing',
+      onDrag: function () {
+        // Dynamic tilt based on drag velocity
+        const vx = InertiaPlugin.getVelocity(this.target, 'x') || 0;
+        gsap.to(this.target, {
+          rotation: vx * 0.02,
+          scale: 1.05,
+          duration: 0.15,
+          overwrite: 'auto',
+        });
+      },
+      onRelease: function () {
+        // Smooth snap back towards home coordinates with playful bounce
+        gsap.to(this.target, {
+          x: 0,
+          y: 0,
+          rotation: 0,
+          scale: 1,
+          duration: 0.85,
+          ease: 'elastic.out(1, 0.45)',
+        });
+      },
+    });
 
-      tl.from('.obs-inquiry-domain-card', {
-        x: -30,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.08,
-        ease: 'power2.out'
-      }, 0.2);
+    // 2. GSAP OBSERVER: 3D interactive tilt & spotlight illumination on pointer move
+    const observer = Observer.create({
+      target: contEl,
+      type: 'pointer',
+      onMove: (self) => {
+        if (dragInstance[0]?.isDragging) return;
+        const rect = contEl.getBoundingClientRect();
+        const pointerX = self.x ?? (self.event as PointerEvent)?.clientX ?? rect.left + rect.width / 2;
+        const pointerY = self.y ?? (self.event as PointerEvent)?.clientY ?? rect.top + rect.height / 2;
+        
+        // Calculate normalized coordinate (-1 to 1)
+        const relX = (pointerX - rect.left) / rect.width - 0.5;
+        const relY = (pointerY - rect.top) / rect.height - 0.5;
 
-      tl.from('.obs-about-display-col', {
-        x: 80,
-        opacity: 0,
-        duration: 0.9,
-        ease: 'power3.out'
-      }, 0.1);
+        gsap.to(imgEl, {
+          rotationY: relX * 24, // 3D tilt Y
+          rotationX: -relY * 20, // 3D tilt X
+          transformPerspective: 800,
+          duration: 0.35,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+      },
+      onHoverEnd: () => {
+        if (dragInstance[0]?.isDragging) return;
+        gsap.to(imgEl, {
+          rotationY: 0,
+          rotationX: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+        });
+      },
+    });
 
-      tl.from('.obs-academy-logo-wrap', {
-        scale: 0.7,
-        rotation: -15,
-        opacity: 0,
-        duration: 0.7,
-        ease: 'back.out(1.7)'
-      }, 0.3);
-    }, containerRef);
-
-    return () => ctx.revert();
+    return () => {
+      dragInstance[0]?.kill();
+      observer.kill();
+    };
   }, []);
 
+  // 3. GSAP FLIP: Smooth morph / zoom toggle upon clicking avatar
+  const handleAvatarClick = () => {
+    const imgEl = imageRef.current;
+    if (!imgEl) return;
+
+    // Capture state before layout change
+    const state = Flip.getState(imgEl);
+
+    // Toggle enlarged state class
+    isEnlargedRef.current = !isEnlargedRef.current;
+    if (isEnlargedRef.current) {
+      imgEl.classList.add('avatar-enlarged');
+    } else {
+      imgEl.classList.remove('avatar-enlarged');
+    }
+
+    // Animate via GSAP Flip
+    Flip.from(state, {
+      duration: 0.65,
+      ease: 'back.out(1.5)',
+      scale: true,
+    });
+  };
+
   return (
-    <section id="about" ref={containerRef} className="obs-about-chamber">
-      <div className="obs-section-header">
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
-          <div className="obs-catalog-tag">Section II • The Scholar's Study</div>
-          {/* Celestial Discovery Marker 2 */}
-          <DiscoveryMarker id="obs-study-02" label="Study Seal" />
-        </div>
-
-        <h2 className="obs-section-title">Academic & Technical Inquiry</h2>
-        <p className="obs-section-subtitle">
-          An exploration into modern software engineering grounded in discipline, curiosity, and interface craftsmanship.
-        </p>
-      </div>
-
-      <div className="obs-about-grid">
-        {/* Left Column: Biography & Interactive Scholarly Tenets */}
-        <div className="obs-about-manuscript">
-          <div className="obs-about-bio-text">
-            <p>{personal.about.p1}</p>
-            <p>{personal.about.p2}</p>
+    <section id="about" className="workspace-section">
+      <div className="workspace-content-container">
+        
+        {/* Section Header */}
+        <div className="section-head-row">
+          <div className="section-tag">
+            <User size={13} />
+            <span>About Me</span>
           </div>
 
-          <div className="obs-inquiry-domains-section">
-            <div className="obs-domains-caption">
-              <Compass size={13} color="var(--brass)" />
-              <span>CORE DISCIPLINES OF STUDY • CLICK TO EXAMINE</span>
-            </div>
-
-            <div className="obs-inquiry-domains-list">
-              {INQUIRY_DOMAINS.map((domain) => {
-                const isSelected = selectedDomain === domain.id;
-
-                return (
-                  <div
-                    key={domain.id}
-                    onClick={() => setSelectedDomain(domain.id)}
-                    className={`obs-inquiry-domain-card ${isSelected ? 'active' : ''}`}
-                    tabIndex={0}
-                    role="button"
-                    aria-expanded={isSelected}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        setSelectedDomain(domain.id);
-                      }
-                    }}
-                  >
-                    <div className="obs-domain-header">
-                      <div className="obs-domain-left">
-                        <span className="obs-domain-roman">{domain.roman}</span>
-                        <h3 className="obs-domain-title">{domain.title}</h3>
-                      </div>
-                      <span className="obs-domain-tag">{domain.tag}</span>
-                    </div>
-
-                    <p className="obs-domain-summary">{domain.summary}</p>
-
-                    {isSelected && (
-                      <div className="obs-domain-deep-dive">
-                        <div className="obs-domain-divider" />
-                        <p>{domain.deepDive}</p>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          <a
+            href={personal.resume_link}
+            onClick={(e) => {
+              if (personal.resume_link === '#') {
+                e.preventDefault();
+                alert('Andrei’s formal resume PDF will be available upon verified recruiter request. Feel free to reach out via Contact!');
+              }
+            }}
+            className="about-resume-btn"
+          >
+            <span>View Resume</span>
+            <ArrowRight size={14} />
+          </a>
         </div>
 
-        {/* Right Column: Academy Seal & Location Plaque */}
-        <div className="obs-about-display-col">
-          <div className="obs-academy-card">
-            {/* Corner Brackets */}
-            <div className="obs-card-bracket-tl" />
-            <div className="obs-card-bracket-tr" />
-            <div className="obs-card-bracket-bl" />
-            <div className="obs-card-bracket-br" />
+        {/* Card Layout: Bio + Avatar + Credentials */}
+        <div className="about-main-card" data-speed="clamp(1.05)">
+          <div className="about-grid">
+            
+            {/* Left Column: Author Narrative */}
+            <div className="about-narrative-col" data-lag="0.1">
+              <h2 className="about-greeting-title">
+                Building thoughtful digital experiences from Digos City to the global web.
+              </h2>
+              
+              <div className="about-paragraphs">
+                <p>
+                  I am an Information Technology scholar and developer based in the Philippines, 
+                  pursuing my degree at <strong>Cor Jesu College</strong>. My journey into technology 
+                  is fueled by a passion for transforming intricate system requirements into clean, 
+                  accessible, and enjoyable digital tools.
+                </p>
+                <p>
+                  I enjoy working across modern frontend architecture (React, TypeScript, GSAP) 
+                  and robust backends (PHP/Laravel, Node.js, relational PostgreSQL/MySQL schemas). 
+                  Outside the screen, I explore astronomy, classical instrument mechanics, and system design literature.
+                </p>
+              </div>
 
-            <div className="obs-academy-header">
-              <div className="obs-academy-logo-wrap">
+              {/* Status Chips */}
+              <div className="about-meta-chips">
+                <div className="status-chip open-work">
+                  <span className="pulsing-green-dot" />
+                  <span>Open to apprentice & freelance roles</span>
+                </div>
+                <div className="status-chip education-chip">
+                  <GraduationCap size={14} className="chip-icon" />
+                  <span>BS Information Technology (2023 – Present)</span>
+                </div>
+                <div className="status-chip location-chip">
+                  <MapPin size={14} className="chip-icon" />
+                  <span>Digos City, Davao del Sur</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Borderless Backgroundless Interactive Avatar + Education Card */}
+            <div className="about-profile-col" data-lag="0.2">
+              <div
+                ref={containerRef}
+                className="about-photo-wrapper borderless-transparent"
+                title="Interactive Avatar: Hover for 3D tilt, Click to FLIP zoom, Drag & Toss with Inertia!"
+              >
+                <div className="avatar-ambient-glow" />
                 <img
-                  src={personal.education.logo}
-                  alt={personal.education.school}
-                  className="obs-academy-logo"
+                  ref={imageRef}
+                  src={personal.avatar}
+                  alt={personal.name}
+                  className="about-avatar-img transparent-cutout"
+                  onClick={handleAvatarClick}
+                  onError={(e) => {
+                    (e.target as HTMLElement).style.display = 'none';
+                  }}
                 />
+                <span className="avatar-interactive-hint">✨ interactive</span>
               </div>
-              <div>
-                <h3 className="obs-academy-degree">{personal.education.degree}</h3>
-                <span className="obs-academy-school">
-                  {personal.education.school} • {personal.education.year}
-                </span>
+
+              <div className="about-school-card">
+                <div className="school-header">
+                  <img
+                    src={personal.education.logo}
+                    alt={personal.education.school}
+                    className="school-logo-img"
+                    onError={(e) => {
+                      (e.target as HTMLElement).style.display = 'none';
+                    }}
+                  />
+                  <div>
+                    <h4 className="school-name">{personal.education.school}</h4>
+                    <span className="school-batch">{personal.education.degree}</span>
+                  </div>
+                </div>
+                <p className="school-detail">
+                  Focused on software engineering, database design, user interface architectures, and distributed systems.
+                </p>
               </div>
             </div>
 
-            <div className="obs-academy-details">
-              <p style={{ marginBottom: '0.85rem' }}>{personal.education.description_p1}</p>
-              <p>{personal.education.description_p2}</p>
-            </div>
           </div>
 
-          <div className="obs-location-plaque">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <MapPin size={15} color="var(--brass)" />
-              <span>STATION: DIGOS CITY, PH</span>
-            </div>
-            <span>06°44' N, 125°21' E</span>
-          </div>
+          {/* Authentic GitHub Contribution Graph */}
+          <GithubHeatmap username={socials.github.username} />
         </div>
+
       </div>
     </section>
   );

@@ -1,23 +1,14 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Layout } from './components/Layout';
-import { ObservatoryView } from './pages/ObservatoryView';
-import { About } from './pages/About';
-import { Projects } from './pages/Projects';
-import { Skills } from './pages/Skills';
-import { Experience } from './pages/Experience';
-import { Contact } from './pages/Contact';
-
-gsap.registerPlugin(ScrollTrigger);
+import { WorkspaceShell } from './components/WorkspaceShell';
+import { HomeStudio } from './pages/HomeStudio';
+import { ProfessionalView } from './pages/ProfessionalView';
 
 const ScrollToAnchor: React.FC = () => {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
     if (hash) {
-      // Defer to let GSAP pin spacers settle before measuring element position
       const timer = setTimeout(() => {
         const element = document.querySelector(hash);
         if (element) {
@@ -37,18 +28,29 @@ export const App: React.FC = () => {
     <BrowserRouter>
       <ScrollToAnchor />
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<ObservatoryView />} />
-          <Route path="about" element={<About />} />
-          <Route path="projects" element={<Projects />} />
-          <Route path="skills" element={<Skills />} />
-          <Route path="experience" element={<Experience />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<ObservatoryView />} />
-        </Route>
+        {/* Creative Illustrated Portfolio Mode */}
+        <Route
+          path="/"
+          element={
+            <WorkspaceShell>
+              <HomeStudio />
+            </WorkspaceShell>
+          }
+        />
+
+        {/* Clean, Distraction-Free Professional Mode (CV / Resume for Recruiters) */}
+        <Route path="/professional" element={<ProfessionalView />} />
+
+        {/* Catch-all */}
+        <Route
+          path="*"
+          element={
+            <WorkspaceShell>
+              <HomeStudio />
+            </WorkspaceShell>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
 };
-
-export default App;

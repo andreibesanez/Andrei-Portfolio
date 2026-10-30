@@ -1,0 +1,218 @@
+/* ==========================================================================
+   FLOATING VERTICAL NAVIGATION DOCK
+   Desktop: Compact left icon dock that expands horizontally on hover
+   Mobile: Clean touch bottom navigation dock
+   Full Dynamic Support for Paper Light & Celestial Midnight Dark Mode
+   ========================================================================== */
+
+.desktop-sidebar-dock {
+  position: fixed;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 900;
+  display: block;
+}
+
+.dock-container {
+  background: var(--bg-surface);
+  backdrop-filter: blur(14px);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 0.5rem;
+  box-shadow: var(--shadow-md);
+  width: 52px;
+  overflow: hidden;
+  transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s ease, background-color 0.4s ease, border-color 0.4s ease;
+  position: relative;
+}
+
+/* Dark mode specific dock container styling */
+html.dark .dock-container {
+  background: rgba(22, 27, 34, 0.88);
+  border-color: #30363D;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+}
+
+/* Draggable Grip Handle */
+.dock-drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0;
+  margin-bottom: 0.35rem;
+  color: var(--text-muted);
+  cursor: grab;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: color var(--transition-fast);
+}
+
+.dock-drag-handle:hover {
+  color: var(--accent-sage);
+}
+
+.dock-drag-handle:active {
+  cursor: grabbing;
+}
+
+/* Expand smoothly on hover */
+.dock-container:hover {
+  width: 180px;
+  box-shadow: var(--shadow-lg);
+}
+
+.dock-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.dock-item-wrapper {
+  position: relative;
+}
+
+.dock-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.dock-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.dock-label {
+  opacity: 0;
+  transform: translateX(-6px);
+  color: var(--text-main);
+  transition: opacity 0.22s ease 0.05s, transform 0.22s ease 0.05s;
+  pointer-events: none;
+}
+
+.dock-container:hover .dock-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.dock-button:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+}
+
+.dock-button:hover .dock-icon {
+  color: var(--accent-sage);
+  transform: scale(1.1);
+}
+
+/* Active State */
+.dock-button.active {
+  background: var(--accent-light);
+  color: var(--accent-sage);
+  font-weight: 600;
+}
+
+.dock-button.active .dock-label {
+  color: var(--accent-sage);
+  font-weight: 600;
+}
+
+.dock-button.active .dock-icon {
+  color: var(--accent-sage);
+}
+
+.dock-active-indicator {
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3.5px;
+  height: 18px;
+  background: var(--accent-sage);
+  border-radius: var(--radius-full);
+}
+
+/* ==========================================================================
+   MOBILE BOTTOM DOCK (< 860px)
+   ========================================================================== */
+
+.mobile-bottom-dock {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .desktop-sidebar-dock {
+    display: none;
+  }
+
+  .mobile-bottom-dock {
+    display: block;
+    position: fixed;
+    bottom: 0.85rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 950;
+    width: calc(100% - 2rem);
+    max-width: 480px;
+    background: var(--bg-surface);
+    backdrop-filter: blur(14px);
+    border: 1.5px solid var(--border-light);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-lg);
+    padding: 0.35rem 0.6rem;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+  }
+
+  html.dark .mobile-bottom-dock {
+    background: rgba(22, 27, 34, 0.92);
+    border-color: #30363D;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  }
+
+  .mobile-dock-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .mobile-dock-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    padding: 0.45rem 0.65rem;
+    color: var(--text-secondary);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+  }
+
+  .mobile-dock-text {
+    font-size: 0.7rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+  }
+
+  .mobile-dock-btn.active {
+    color: var(--accent-sage);
+  }
+
+  .mobile-dock-btn.active .mobile-dock-icon {
+    transform: scale(1.15);
+  }
+}
